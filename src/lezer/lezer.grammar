@@ -1,0 +1,31 @@
+@top template { Element* }
+
+Element {"{" Slot "}" | text }
+
+text {LexemeOrString | Punctuation }
+Slot {DependencyLabel ":" invocation | invocation}
+DependencyLabel {Label "<" Label | Label }
+Label {Role "_" Index | Role}
+Role {identifier}
+Index {index}
+invocation {Function | Interpolation | String}
+Function {Fname"("Args")" | Fname"()"}
+Fname {identifier}
+Args{list<invocation>}
+Interpolation{identifier}
+LexemeOrString{lexOrStr}
+Punctuation{punctuation}
+
+@tokens {
+  String { '"' char* '"' }
+  char {!["]}
+  whitespace { $[ \n\r\t] }
+  identifier {(![{}_<:(), \n\r\t"])+}
+  index {@digit+}
+  punctuation{$[.?!:;–—()\[\]'/\,|~@#%&*^_<>«»·¿¡‚„「」『』′″`\"-]}
+  lexOrStr{![.?!:;–—()[\]'/\,|~@#%&*^_<>«»·¿¡‚„「」『』′″`{ \n\r\t\"-]+}
+}
+
+@skip { whitespace }
+
+list<item> { item ("," item)* }
