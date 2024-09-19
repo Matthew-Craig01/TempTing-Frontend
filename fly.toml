@@ -1,12 +1,15 @@
-# fly.toml app configuration file generated for frontend-icy-cloud-3590 on 2024-09-19T09:46:25+02:00
+# fly.toml app configuration file generated for frontend-icy-cloud-3590 on 2024-09-19T09:57:57+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'frontend-icy-cloud-3590'
+app = 'tempting-frontend'
 primary_region = 'jnb'
 
 [build]
+
+[env]
+  PORT = '80'
 
 [http_service]
   internal_port = 80
@@ -16,11 +19,7 @@ primary_region = 'jnb'
   min_machines_running = 0
   processes = ['app']
 
-[env]
-PORT = "80"
-
 [[vm]]
   memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
-
